@@ -18,7 +18,7 @@
 // line height
 // dist-per-pixel
 
-#include <libpng17/png.h>
+#include <png.h>
 #include <ft2build.h>
 #include <freetype/ftbitmap.h>
 #include <set>

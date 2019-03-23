@@ -657,14 +657,10 @@ else()
 	set(LIBZIP_LIBRARY libzip)
 endif()
 
-# FindPNG does a few things we don't want. So do it ourselves.
-# Fixed to libpng16/17, otherwise it can pick up earlier even if newer exists.
-find_path(PNG_PNG_INCLUDE_DIR NAMES "libpng16/png.h" "libpng17/png.h")
-find_library(PNG_LIBRARY NAMES png16 libpng16 png17 libpng17)
-find_package(PackageHandleStandardArgs)
-find_package_handle_standard_args(PNG REQUIRED_VARS PNG_LIBRARY PNG_PNG_INCLUDE_DIR)
-if(PNG_FOUND)
+include(FindPNG)
+if(PNG_FOUND AND (PNG_VERSION_STRING VERSION_GREATER "1.6"))
 	include_directories(${PNG_PNG_INCLUDE_DIR})
+	message("PNG_INCLUDE_DIR: ${PNG_PNG_INCLUDE_DIR}")
 else()
 	if(ARM)
 		set(PNG_ARM_INCLUDES
@@ -699,7 +695,7 @@ else()
 		${PNG_ARM_INCLUDES}
 	)
 	set(PNG_LIBRARY png17)
-	include_directories(ext/native/ext)
+	include_directories(ext/native/ext/libpng17)
 endif()
 
 set(nativeExtra)
