@@ -32,6 +32,7 @@ do
 			QMAKE_ARGS="CONFIG+=debug ${QMAKE_ARGS}"
 			;;
 		--system-ffmpeg)
+			CMAKE_ARGS="-DUSE_SYSTEM_FFMPEG=ON"
 			QMAKE_ARGS="CONFIG+=system_ffmpeg ${QMAKE_ARGS}"
 			;;
 		--headless) echo "Headless mode enabled"
